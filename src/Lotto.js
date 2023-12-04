@@ -36,7 +36,7 @@ class Lotto {
     const result = this.#getInitializedResult();
     tickets.forEach((ticket) => {
       const matched = ticket.filter((number) => this.#numbers.includes(number));
-      const isBonus = this.#numbers.includes(bonusNumber);
+      const isBonus = ticket.includes(bonusNumber);
       if (matched.length === 3) result.three += 1;
       if (matched.length === 4) result.four += 1;
       if (matched.length === 5 && !isBonus) result.five += 1;
