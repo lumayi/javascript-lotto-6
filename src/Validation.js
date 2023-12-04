@@ -19,13 +19,13 @@ export default class Validation {
   }
 
   static isSixNumbers(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO_RULE.pickableNumbers) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
   }
 
   static isUniqueNumbers(numbers) {
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== LOTTO_RULE.pickableNumbers) {
       throw new Error('[ERROR] 각 로또 번호는 중복될 수 없습니다.');
     }
   }
@@ -50,7 +50,7 @@ export default class Validation {
   }
 
   static isInRange(number) {
-    if (number < 1 || number > 45) {
+    if (number < LOTTO_RULE.minNum || number > LOTTO_RULE.maxNum) {
       throw new Error('[ERROR] 로또 번호는 1-45 사이의 정수만 가능합니다.');
     }
   }

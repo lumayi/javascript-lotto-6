@@ -5,8 +5,8 @@ import InputView from './views/InputView.js';
 import OutputView from './views/OutputView.js';
 
 export default class Vendor {
-  async isssueTickets() {
-    const tickets = await this.#getNumberOfTickets();
+  static async isssueTickets() {
+    const tickets = await Vendor.getNumberOfTickets();
     const issuedTickets = [];
     for (let i = 0; i < tickets; i += 1) {
       const ticket = Computer.getRandomSixNumbers();
@@ -17,14 +17,14 @@ export default class Vendor {
     return issuedTickets;
   }
 
-  async #getNumberOfTickets() {
+  static async getNumberOfTickets() {
     try {
       const paid = await InputView.getPurchaseAmount();
       Validation.validatePaidMoney(paid);
       return paid / LOTTO_RULE.ticketPrice;
     } catch (error) {
       OutputView.printErrors(error);
-      return this.#getNumberOfTickets();
+      return Vendor.getNumberOfTickets();
     }
   }
 }
