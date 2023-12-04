@@ -1,8 +1,15 @@
 import Lotto from './Lotto.js';
+import Validation from './Validation.js';
 import InputView from './views/InputView.js';
 import OutputView from './views/OutputView.js';
 
 export default class Host {
+  #lotto;
+
+  constructor(lotto) {
+    this.#lotto = lotto;
+  }
+
   static async enrollWinningNumbers() {
     try {
       const winningNumbers = await InputView.getWinningNumbers();
@@ -17,15 +24,7 @@ export default class Host {
   static async enrollBonusNumber(winningNumbers) {
     try {
       const bonus = await InputView.getBonusNumber();
-      if (winningNumbers.includes(bonus)) {
-        throw new Error('[ERROR] 로또 번호와 중복된 수는 입력 불가합니다.');
-      }
-      if (bonus < 1 || bonus > 45) {
-        throw new Error('[ERROR] 1-45 사이의 정수만 입력 가능합니다.');
-      }
-      if (!Number.isInteger(bonus)) {
-        throw new Error('[ERROR] 1-45 사이의 정수만 입력 가능합니다.');
-      }
+      Validation.validateBonus(winningNumbers, bonus);
       return bonus;
     } catch (error) {
       OutputView.printErrors(error);

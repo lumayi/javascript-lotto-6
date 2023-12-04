@@ -9,7 +9,7 @@ class App {
     const tickets = await vendor.isssueTickets();
     const { winningNumbers, lotto } = await Host.enrollWinningNumbers();
     const bonusNumber = await Host.enrollBonusNumber(winningNumbers);
-    lotto.getResult(tickets, bonusNumber);
+    lotto.getWinningResult(tickets, bonusNumber);
   }
 }
 const app = new App();
